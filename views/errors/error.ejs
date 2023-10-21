@@ -1,0 +1,10 @@
+<%# Assignment 3, Basic Error Handling acti %>
+<div class="background">
+    <!-- <p>Unit 3, Basic error handling</p> -->
+<%  if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+}%>
+<%- message %>
+</div>

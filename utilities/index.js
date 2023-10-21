@@ -1,6 +1,5 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
-
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -24,7 +23,6 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>"
   return list
 }
-
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
@@ -60,5 +58,44 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-module.exports = Util
+Util.buildProductViewDetailsGrid = async function(data){
+  let grid
+  console.log("____________________________________________________________________")
+  if(data.length > 0){
+    data.forEach(vehicle => { 
+      grid = '<img class ="vehicle_detail_img" src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make +' ' + vehicle.invModel +' ">'
+      
+      grid += '<div class="vehicle_detail_box">'
+      grid += '<h2 class = "vehicle_name">'
+      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details'
+      grid += '</h2>'
+      grid += '<p class = "vehicle_price">'
+      + '<strong>Price:</strong>' + ' ' + '<strong>' + '$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)
+      grid += '</p>'
+      grid += '<p class = "vehicle_year">'
+      + '<strong>Year:</strong> ' + ' ' + vehicle.inv_year
+      grid += '</p>'
+      grid += '<p class="vehicle_color">'
+      + '<strong>Color:</strong>' + ' ' + vehicle.inv_color
+      grid += '</p>'
+      grid += '<p class="vehicle_miles">'
+      + '<strong>Miles:</strong>' + ' ' + '<strong>' + ' ' + new Intl.NumberFormat('en-US').format(vehicle.inv_mile)
+      grid += '</p>'
+      grid += '</div>'
+    })
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  console.log(grid)
+  return grid
+}
 
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+module.exports = Util
