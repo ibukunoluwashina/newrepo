@@ -54,13 +54,13 @@ Util.buildClassificationGrid = async function(data){
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
-  console.log(grid)
+  // console.log(grid)
   return grid
 }
 
 Util.buildProductViewDetailsGrid = async function(data){
   let grid
-  console.log("____________________________________________________________________")
+  // console.log("____________________________________________________________________")
   if(data.length > 0){
     data.forEach(vehicle => { 
       grid = '<img class ="vehicle_detail_img" src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make +' ' + vehicle.invModel +' ">'
@@ -79,14 +79,14 @@ Util.buildProductViewDetailsGrid = async function(data){
       + '<strong>Color:</strong>' + ' ' + vehicle.inv_color
       grid += '</p>'
       grid += '<p class="vehicle_miles">'
-      + '<strong>Miles:</strong>' + ' ' + '<strong>' + ' ' + new Intl.NumberFormat('en-US').format(vehicle.inv_mile)
+      + '<strong>Miles:</strong>' + ' ' + '<strong>' + ' ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles)
       grid += '</p>'
       grid += '</div>'
     })
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
-  console.log(grid)
+  // console.log(grid)
   return grid
 }
 

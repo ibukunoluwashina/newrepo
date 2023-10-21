@@ -24,23 +24,21 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   const inv_id = req.params.invId;
   // Retrieve data for the specific vehicle using inv_id
   const vehicle = await invModel.getVehicleById(inv_id);
-  if (!vehicle) {
-    // Handle the case where the vehicle is not found
-    return next({ status: 404, message: 'Vehicle not found' });
-  }
+  console.log("Data from viewVehicleDetails:", vehicle)
+  const grid = await utilities.buildProductViewDetailsGrid(vehicle)
+  // if (!vehicle) {
+  //   // Handle the case where the vehicle is not found
+  //   return next({ status: 404, message: 'Vehicle not found' });
+  // }
   let nav = await utilities.getNav();
   const productMake = vehicle.inv_make;
   const productModel = vehicle.inv_model;
   const productYear = vehicle.inv_year;
-  // You might need to add the following line to get the vehicle grid
-  // const grid = await utilities.buildVehicleGrid(vehicle);
-  // Render the vehicle detail view
+  
   res.render('./inventory/detail.ejs', {
     title: productYear + ' ' + productMake + ' ' + productModel,
-    nav,
-    // Add 'vehicle' and 'grid' to the view
-    vehicle,
-    // grid,
+    nav,  
+    grid,
   });
 };
 
