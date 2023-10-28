@@ -25,6 +25,7 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(require("./routes/static"));
+app.use("/inv", inventoryRoute)
 //Index route-Unit 3, activity
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // inventory routes unit 3, activity
@@ -37,7 +38,22 @@ app.use("/inv", require("./routes/inventoryRoute"));
   });
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
+
+// compering code
+app.use(static) //application itself will use this resource
+//Index route
+app.use("/inv", inventoryRoute) //composed of 3 elements app.use an Express function that directs the application, /inv is a keyword in our app, indicating that a route contains this word, inventoryRoute is the variable representing the inventoryRoute.js file
+app.get("/", utilities.handleErrors(baseController.buildHome)) //altered for MVC to execute the function in controller, build nav bar to index.ejs & then wrapped in error handler.
+// File not found route - must be last route in list
+app.use(async (req, res, next) => { //the Express use function containing an async arrow function.
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'}) // the next function to pass control to the next function in the processing chain. (this one an error object.)
+})
+
+
+
+
+
+
 
 /* ***********************
 * Express Error Handler

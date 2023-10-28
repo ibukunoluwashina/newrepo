@@ -4,7 +4,6 @@
 *:after {
   box-sizing: border-box;
   font-size: 62.5%;
-  /* background-color: aqua; */
   text-decoration: none;
 }
 
@@ -13,9 +12,13 @@
   font-size: 4rem;
   display: flex;
   justify-content: space-between;
-  border: 0.5rem;
-  margin: 0.5rem;
-  border: 0.1rem;
+  border: 2rem;
+  margin: 2rem;
+  border: 2rem;
+}
+
+header#top-header a{
+  color: black;
 }
 
 nav ul{
@@ -31,15 +34,25 @@ nav ul li{
   color: white;
   list-style-type: none;
   text-align: center;
+} 
+
+nav ul li a{
+  font-size: 15px;
+} 
+
+
+ul{
+  padding: 1rem;
+  margin: 1rem;
+  border: 1rem;
 }
-main{
-  /* background-image: url(../images/vehicles/delorean.jpg); */
+
+
+main{ 
   padding: 4rem;
   margin: 2rem;
   border: 1rem;
-  border: 2rem;
-  width: 100%;
-  height: 100%;
+  text-align: center;
 }
 
 .topdmc{
@@ -104,6 +117,7 @@ h2{
   margin: 2rem;
   border: 1rem;
   background-color: transparent;
+  justify-content: center;
 }
 
 .card2{
@@ -113,6 +127,7 @@ h2{
   margin: 2rem;
   border: 1rem;
   background-color: transparent;
+  justify-content: center;
 }
 
 .review h1{
@@ -124,13 +139,14 @@ h2{
 
 .review {
   background-color: transparent;
+  justify-content: center;
 }
 
 footer{
-  padding: 2rem;
-  background-color: aqua;
-  border: 2rem;
-  margin: 2rem;
+  padding: 1rem;
+  background-color: black;
+  border: 1rem;
+  margin: 1rem;
 }
 
 .review ul li{
@@ -138,6 +154,7 @@ footer{
 }
 
 ul#inv-display{
+  display: block;
   padding: 2rem;
   margin: 2rem;
   border: 2rem;
@@ -166,16 +183,59 @@ h2{
 }
 
 .namePrice{
-  padding: 2rem;
-  margin: 2rem;
-  border: 2rem;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1rem;
   text-align: center;
+  font-size: 1.5rem;
+}
+
+span.siteName a{
   font-size: 20px;
 }
 
+a{
+  color: white;
+}
+
+ul#inv-display{
+  list-style-type: none;
+}
+
+.namePrice h2 a{
+  color: blue;
+  font-size: 15px;
+}
+
+p strong{
+  font-size: 15px;
+}
+
+.copyright{
+  color: white;
+}
+
+footer a{
+  padding: 5px;
+  margin: 5px;
+  border: 2px;
+  font-size: 15px;
+}
 
 /* 64em is also 1028px when base front is 16px */
 @media only screen and (min-width: 64rem){
+body{
+  display: flex;
+  justify-content: center;
+  background-image: url(../images/site/checkerboard.jpg);
+  background-size: 300px 380px;
+}
+
+#wrapper{
+  background: white;
+  width: 90%;
+  border: 0.5rem solid red;
+}
 
   .delorean{
       width: 100%;
@@ -214,7 +274,6 @@ h2{
     .topdmc{
       font-size: 12rem;
 }
-}
 
 .cardchild{
   background-color: aqua;
@@ -227,4 +286,40 @@ h2{
   padding: 0.2rem;
   margin: 0.2rem;
   border: 0.1rem;
+}
+
+header#top-header a{
+  color: black;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border: 0.1rem;
+}
+
+h1{grid-area: h1;}
+.vehicle_detail_image{grid-area: vehicle_detail_image;}
+.vehicle_detail_box{grid-area: vehicle_detail_box;}
+
+main{
+  display: grid;
+  grid-template-areas: 
+  'h1 h1 h1 h1'
+  'vehicle_detail_image vehicle_detail_image vehicle_detail_box vehicle_detail_box ';
+}
+
+.vehicle_detail_box{
+  padding: 1rem;
+  border: 1rem;
+  margin: 1px;
+}
+
+img.vehicle_detail_img{
+  height: 80%;
+}
+
+.namePrice{
+  font-size: 2rem;
+}
+
+
+
 }

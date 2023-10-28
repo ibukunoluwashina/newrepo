@@ -26,10 +26,7 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   const vehicle = await invModel.getVehicleById(inv_id);
   console.log("Data from viewVehicleDetails:", vehicle)
   const grid = await utilities.buildProductViewDetailsGrid(vehicle)
-  // if (!vehicle) {
-  //   // Handle the case where the vehicle is not found
-  //   return next({ status: 404, message: 'Vehicle not found' });
-  // }
+  
   let nav = await utilities.getNav();
   const productMake = vehicle.inv_make;
   const productModel = vehicle.inv_model;

@@ -34,14 +34,14 @@ Util.buildClassificationGrid = async function(data){
     data.forEach(vehicle => { 
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+      + '" title="view ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="view ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
@@ -58,34 +58,34 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+// *********build the product view***************
 Util.buildProductViewDetailsGrid = async function(data){
-  let grid
+  // let grid
   // console.log("____________________________________________________________________")
-  if(data.length > 0){
-    data.forEach(vehicle => { 
-      grid = '<img class ="vehicle_detail_img" src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make +' ' + vehicle.invModel +' ">'
+  // if(data.length > 0){
+      let grid = '<img class="vehicle_detail_img" src="' + data.inv_image + '" alt="Image of ' + data.inv_make +' ' + data.invModel +' ">'
       
       grid += '<div class="vehicle_detail_box">'
-      grid += '<h2 class = "vehicle_name">'
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details'
+      grid += '<h2 class= "vehicle_name">'
+      + data.inv_make + ' ' + data.inv_model + ' details'
       grid += '</h2>'
-      grid += '<p class = "vehicle_price">'
-      + '<strong>Price:</strong>' + ' ' + '<strong>' + '$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)
+      grid += '<p class= "vehicle_price">'
+      + '<strong>Price:</strong>' + ' ' + '<strong>' + '$' + new Intl.NumberFormat('en-US').format(data.inv_price)
       grid += '</p>'
       grid += '<p class = "vehicle_year">'
-      + '<strong>Year:</strong> ' + ' ' + vehicle.inv_year
+      + '<strong>Year:</strong> ' + ' ' + data.inv_year
       grid += '</p>'
       grid += '<p class="vehicle_color">'
-      + '<strong>Color:</strong>' + ' ' + vehicle.inv_color
+      + '<strong>Color:</strong>' + ' ' + data.inv_color
       grid += '</p>'
       grid += '<p class="vehicle_miles">'
-      + '<strong>Miles:</strong>' + ' ' + '<strong>' + ' ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles)
+      + '<strong>Miles:</strong>' + ' ' + '<strong>' + ' ' + new Intl.NumberFormat('en-US').format(data.inv_miles)
       grid += '</p>'
       grid += '</div>'
-    })
-  } else { 
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-  }
+    
+  // } else { 
+  //   grid= '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  // }
   // console.log(grid)
   return grid
 }
