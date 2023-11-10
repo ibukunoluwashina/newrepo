@@ -222,6 +222,137 @@ footer a{
   font-size: 15px;
 }
 
+/* Form */
+/* Login Page */
+.login_page{
+  width: 100%;
+  /* background-color: blue; */
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border: 0.1rem;
+}
+
+.login_page h1{
+  text-align: left;
+}
+
+#account_email{
+  width: 70%;
+  font-size: 1rem;
+}
+
+#account_password{
+  width: 70%;
+  font-size: 1rem;
+}
+
+#togglePassword{
+ width: 40%;
+ padding: 0.5rem;
+ margin: 0.5rem;
+ border: 0.5rem;
+ color: white;
+ background-color: black;
+ border-radius: 20px;
+}
+
+button{
+  width: 20%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 0.5rem;
+}
+
+.form_label{
+  margin: 0.2rem;
+  padding: 0.2rem;
+  border: 0.2rem;
+  background-color: turquoise;
+}
+
+fieldset{
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.form_label a{
+  color: black;
+}
+
+span{
+  text-align: left;
+  font-size: 1rem;
+}
+
+#account_firstname{
+  width: 50%;
+  font-size: 1rem;
+}
+
+#account_lastname{
+  width: 70%;
+  font-size: 1rem;
+}
+
+form{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+/* Registration */
+.registration_form{
+  background-color: turquoise;
+}
+
+.registerContainer h1{
+  text-align: left;
+}
+
+.registerContainer h2{
+  color: black;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 0.1rem;
+}
+
+.registerContainer{
+  width: 100%;
+}
+
+/* Server side validation ul */
+ul.notice{
+  color: red;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+/* Client side validation CSS */
+input:required:invalid, input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+ }
+  input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+  }
+
+input{
+    height: 30px;
+    border-radius: 3px;
+  }
+
+label{
+    text-align: left;
+    font-size: 20px;
+}
+
+
+  
 /* 64em is also 1028px when base front is 16px */
 @media only screen and (min-width: 64rem){
 body{
@@ -299,7 +430,7 @@ h1{grid-area: h1;}
 .vehicle_detail_image{grid-area: vehicle_detail_image;}
 .vehicle_detail_box{grid-area: vehicle_detail_box;}
 
-main{
+.vehicle_inv{
   display: grid;
   grid-template-areas: 
   'h1 h1 h1 h1'
@@ -320,6 +451,15 @@ img.vehicle_detail_img{
   font-size: 2rem;
 }
 
+/* login */
+.login_page{
+  width: 50%;
+}
+
+/* registration */
+.registerContainer{
+  width: 50%;
+}
 
 
 }

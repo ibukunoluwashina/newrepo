@@ -1,0 +1,14 @@
+<!-- management.ejs -->
+<div class="vehicle_inv">
+    <% if (title) { %>
+      <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/');
+    } %>
+  
+    <% messages() %>
+  
+    <!-- Links to trigger processes -->
+    <a href="/inv/add-classification">Add New Classification</a>
+    <a href="/inv/add-inventory">Add New Inventory</a>
+  </div>

@@ -47,4 +47,15 @@ invCont.triggerIntentionalError = function (req, res, next) {
   next(error);
 };
 
+// Controller method to show the management view
+invCont.showManagementView = function(req, res){
+  // Retrieve data from the model if needed
+  const data = invModel.getDataForManagementView();
+
+  // Render the view and pass the data
+  res.render('./inventory/management.ejs', { title: add-classification + ' ' + add-inventory,
+nav,
+grid});
+};
+
 module.exports = invCont;

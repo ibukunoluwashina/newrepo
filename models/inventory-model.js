@@ -1,4 +1,7 @@
 const pool = require("../database/");
+// Import necessary modules and setup your database connection
+const db = require("../database/");
+
 
 /* ***************************
  * Get all classification data
@@ -42,5 +45,23 @@ async function getVehicleById(inv_id) {
     // return null;
   }
 }
+
+// Function to insert data into the database
+
+// Function to insert data into the classification_name table
+exports.insertClassification = function(classification) {
+  const query = 'INSERT INTO public.classification_name (classification_name) VALUES (2)';
+
+  // Assuming classification is a string
+  return db.query(query, [classification]);
+};
+
+// Function to retrieve data for the management view
+exports.getDataForManagementView = function() {
+  
+  return {};
+};
+
+  
 
 module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById };

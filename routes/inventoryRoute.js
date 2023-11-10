@@ -10,4 +10,7 @@ router.get("/detail/:invId", invController.buildVehicleDetail);
 // Route for Intentional Error
 router.get("/intentional-error", invController.triggerIntentionalError);
 
+// Route to build management view
+router.get("/management/:classificationId", invController.showManagementView);
+
 module.exports = router;
