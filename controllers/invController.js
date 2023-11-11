@@ -74,7 +74,7 @@ invCont.processAddClassification = function(req, res) {
 
   // Server-side validation
   if (!classificationName(classificationName)) {
-    req.flash('notice', 'Invalid classification name. Please check your input.');
+    req.flash('error', 'Invalid classification name. Please check your input.');
     return res.redirect('/inv/add-classification');
 }
 
@@ -84,10 +84,10 @@ const success = invModel.insertClassification({ classificationName });
 if (success) {
     // Update navigation bar and render the management view
     req.app.locals.nav = getUpdatedNavigationBar();
-    req.flash('notice', 'Classification added successfully.');
+    req.flash('success', 'Classification added successfully.');
     return res.redirect('/inv/management');
 } else {
-    req.flash('notice', 'Failed to add classification. Please try again.');
+    req.flash('error', 'Failed to add classification. Please try again.');
     return res.redirect('/inv/add-classification');
 }
 };
