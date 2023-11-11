@@ -48,14 +48,48 @@ invCont.triggerIntentionalError = function (req, res, next) {
 };
 
 // Controller method to show the management view
-invCont.showManagementView = function(req, res){
+invCont.showManagementView = async function(req, res){
   // Retrieve data from the model if needed
-  const data = invModel.getDataForManagementView();
-
+  let nav = await utilities.getNav();
   // Render the view and pass the data
-  res.render('./inventory/management.ejs', { title: add-classification + ' ' + add-inventory,
+  res.render('./inventory/management.ejs', {  
+    title:"Vehicle Management",
 nav,
-grid});
+});
+};
+
+// Controller method to show the add-classification view
+invCont.showAddClassificationView = async function(req, res) {
+  let nav = await utilities.getNav();
+  // Render the view
+  res.render('./inventory/add-classification.ejs',{
+    title:'Add New Classification',
+    nav,
+  });
+};
+
+// Controller method to process form submission
+invCont.processAddClassification = function(req, res) {
+  const { classificationName } = req.body;
+
+  // Server-side validation
+  if (!classificationName(classificationName)) {
+    req.flash('notice', 'Invalid classification name. Please check your input.');
+    return res.redirect('/inv/add-classification');
+}
+
+// Insert data into the database
+const success = invModel.insertClassification({ classificationName });
+
+if (success) {
+    // Update navigation bar and render the management view
+    req.app.locals.nav = getUpdatedNavigationBar();
+    req.flash('notice', 'Classification added successfully.');
+    return res.redirect('/inv/management');
+} else {
+    req.flash('notice', 'Failed to add classification. Please try again.');
+    return res.redirect('/inv/add-classification');
+}
 };
 
 module.exports = invCont;

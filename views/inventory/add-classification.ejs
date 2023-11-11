@@ -1,0 +1,22 @@
+<!-- add-classification.ejs -->
+<div class="vehicle_inv">
+    <% if (title) { %>
+      <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/');
+    } %>
+  
+  <%- messages() %>
+
+    <p>FIELD IS REQUIRED.</p>
+    <fieldset>
+        <!-- Classification form -->
+    <form id="classificationForm" action="/inv/management" method="post" onsubmit="return validateForm()">
+      <label for="classificationName">Classification Name:</label>
+      <p>NAME MUST BE ALPHABETIC CHARACTER ONLY.</p>
+      <input type="text" id="classificationName" name="classificationName" required value="<%= locals.classificationName %>" >
+      <button type="submit">Add Classification</button>
+  </form>
+    </fieldset>
+  </div>
+  <script src="/js/script.js"></script>

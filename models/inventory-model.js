@@ -50,7 +50,7 @@ async function getVehicleById(inv_id) {
 
 // Function to insert data into the classification_name table
 exports.insertClassification = function(classification) {
-  const query = 'INSERT INTO public.classification_name (classification_name) VALUES (2)';
+  const query = 'INSERT INTO public.classification (classification_name) VALUES ($1)';
 
   // Assuming classification is a string
   return db.query(query, [classification]);
@@ -62,6 +62,18 @@ exports.getDataForManagementView = function() {
   return {};
 };
 
+exports.insertClassification = function(_classification) {
+  const query = 'INSERT INTO public.classification (classification_name) VALUES ($1)';
+
+  try {
+      // Assuming data is an array corresponding to the values in the query
+      db.query(query, [data.classificationName]);
+      return true;
+  } catch (error) {
+      console.error(error);
+      return false;
+  }
+};
   
 
 module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById };

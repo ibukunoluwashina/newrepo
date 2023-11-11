@@ -11,6 +11,13 @@ router.get("/detail/:invId", invController.buildVehicleDetail);
 router.get("/intentional-error", invController.triggerIntentionalError);
 
 // Route to build management view
-router.get("/management/:classificationId", invController.showManagementView);
+router.get("/management", invController.showManagementView);
+
+// Route to display the add-classification view
+router.get('/add-classification', invController.showAddClassificationView);
+
+// Route to handle form submission
+router.post('/add-classification', invController.processAddClassification);
+
 
 module.exports = router;
