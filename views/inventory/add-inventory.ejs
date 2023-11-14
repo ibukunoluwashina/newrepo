@@ -1,4 +1,4 @@
-<div class="vehicle_inv">
+<div class="add_class">
     <% if (title) { %>
       <h1><%= title %></h1>
     <% } else {
@@ -12,7 +12,7 @@
         <label for="classification">Classification:</label>
         <select id="inv_classification" name="classification" required>
           <!-- Include options dynamically populated from the server (passed from controller) -->
-          <% classifications.forEach(classification => { %>
+          <% classifications.rows.forEach((classification) => { %>
             <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
           <% }) %>
         </select>

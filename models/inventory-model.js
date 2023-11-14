@@ -57,18 +57,18 @@ exports.insertClassification = function(classification) {
 };
 
 // Function to retrieve data for the management view
-exports.getDataForManagementView = function() {
+getDataForManagementView = function() {
   
   return {};
 };
 
-exports.insertClassification = function(classification_name) {
+async function insertClassification(classification_name) {
   const query = 'INSERT INTO public.classification (classification_name) VALUES ($1)';
 
   try {
       // Assuming data is an array corresponding to the values in the query
-      db.query(query, [classification_name]);
-      return true;
+      return await db.query(query, [classification_name]);
+      
   } catch (error) {
       console.error(error);
       return false;
@@ -79,7 +79,7 @@ exports.insertClassification = function(classification_name) {
 
 async function registerInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id){
   try {
-    const sql = "INSERT INTO account (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 'Client') RETURNING *"
+    const sql = "INSERT INTO account (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ) RETURNING *"
     return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id])
   } catch (error) {
     return error.message
@@ -87,4 +87,4 @@ async function registerInventory(inv_make, inv_model, inv_year, inv_description,
 }
 
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, registerInventory };
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, registerInventory, insertClassification };

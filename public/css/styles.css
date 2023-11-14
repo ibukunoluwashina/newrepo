@@ -346,17 +346,72 @@ input{
     border-radius: 3px;
   }
 
+/* management, add-classification, add-inventory */
 label{
     text-align: left;
     font-size: 20px;
 }
 
-.vehicle_inv a{
-  color: black;
+.vehicle_invent{
+  border: 0.2rem solid black;
+  margin: 0.2rem;
+  padding: 0.2rem;
+  background-color: turquoise;
+  text-align: center;
 }
 
+.vehicle_invent a{
+  display: grid;
+  grid-template-rows: 1fr;
+  color: black;
+  font-size: 1.5rem;
+  margin: 2rem;
+  border: 0.2rem;
+  padding: 0.2rem;
+}
 
-  
+.add_class{
+  border: 2px solid black;
+  margin: 2px;
+  padding: 2px;
+  background-color: turquoise;
+  text-align: center;
+  width: 70%;
+}
+
+.add_class h1, p, label{
+  text-align: left;
+  font: 12px   sans-serif;
+  margin: 5px;
+  padding: 5px;
+  border: 5px;
+}
+
+input#classificationName{
+  width: 50%;
+  font-size: 15px;
+}
+
+button{
+  font-size: 7px;
+}
+
+select#inv_classification{
+  width: 50%;
+  font-size: 10px;
+}
+
+form#addInventoryForm, input{
+  width: 70%;
+  font-size: 10px;
+}
+
+textarea#inv_description{
+  width: 100%;
+  height: 150px;
+  font-size: 10px;
+}
+
 /* 64em is also 1028px when base front is 16px */
 @media only screen and (min-width: 64rem){
 body{
@@ -464,6 +519,11 @@ img.vehicle_detail_img{
 .registerContainer{
   width: 50%;
 }
+
+.vehicle_inv a{
+  text-align: center;
+}
+
 
 
 }

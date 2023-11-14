@@ -69,26 +69,26 @@ invCont.showAddClassificationView = async function(_req, res) {
 };
 
 // Controller method to process form submission
-invCont.processAddClassification = function(req, res) {
+invCont.processAddClassification = async function(req, res) {
   const { classification_name } = req.body;
 
   // Server-side validation
-  if (!classification_name(classification_name)) {
+  if (!classification_name) {
     req.flash('error', 'Invalid classification name. Please check your input.');
-    return res.redirect('/inv/add-classification');
+    return res.redirect('./inventory/add-classification');
 }
 
 // Insert data into the database
-const success = invModel.insertClassification({ classification_name });
-
+const success = await invModel.insertClassification(classification_name );
+let nav = await utilities.getNav();
 if (success) {
-    // Update navigation bar and render the management view
-    req.app.locals.nav = getUpdatedNavigationBar();
     req.flash('success', 'Classification added successfully.');
-    return res.redirect('/inv/management');
+    res.render('./inventory/management',{
+      title:'Management',
+      nav,})
 } else {
     req.flash('error', 'Failed to add classification. Please try again.');
-    return res.redirect('/inv/add-classification');
+    return res.redirect('./inventory/add-classification');
 }
 };
 
@@ -98,20 +98,22 @@ if (success) {
 /* ****************************************
 *  Deliver inventory view
 * *************************************** */
-invCont,showAddInventoryView = async function(req, res, next) {
+invCont.showAddInventoryView = async function(req, res, next) {
   let nav = await utilities.getNav()
-  res.render("inv/add-inventory", {
+  const classifications = await invModel.getClassifications()
+  res.render("./inventory/add-inventory", {
     title: "Add inventory",
     nav,
     errors: null,
+    classifications,
   })
 }
 
 invCont.regInventory = async function (req, res) {
   let nav = await utilities.getNav()
-  const regInventory = { 
+  const { 
     inv_make,
-    model,
+    inv_model,
     inv_year,
     inv_description,
     inv_image,
@@ -121,24 +123,35 @@ invCont.regInventory = async function (req, res) {
     inv_color,
     classification_id,
   } = req.body
-}
 
-if (regInventory) {
+  const result = invModel.registerInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,)
+
+if (result) {
   req.flash(
     "notice",
-    `Congratulations, you\'re registered ${inv_make}.`
+    `Congratulations, you have registered vehicle ${inv_make} ${inv_model}.`
   )
-  res.status(201).render("/inv/management", {
+  res.status(201).render("./inventory/management", {
     title: "Vehicle Management ",
     nav,
   })
 } else {
   req.flash("notice", "Sorry, the registration failed.")
-  res.status(501).render("inv/add-inventory", {
+  res.status(501).render("./inventory/add-inventory", {
     title: "Add Inventory",
     nav,
   })
 }
+}
 
-
-module.exports = { invCont, showManagementView, showAddClassificationView, showAddInventoryView, regInventory };
+module.exports = invCont

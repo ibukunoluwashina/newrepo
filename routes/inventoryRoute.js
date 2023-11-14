@@ -24,8 +24,5 @@ router.get('/add-inventory', invController.showAddInventoryView);
 // router to submit car inventory
 router.post("add-inventory", invController.regInventory)
 
-// Route to handle form submission and add inventory
-router.post('/add-inventory', invController.addInventory);
-
 
 module.exports = router;
