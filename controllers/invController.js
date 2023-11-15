@@ -112,6 +112,7 @@ invCont.showAddInventoryView = async function(req, res, next) {
 invCont.regInventory = async function (req, res) {
   let nav = await utilities.getNav()
   const { 
+    classification_id,
     inv_make,
     inv_model,
     inv_year,
@@ -121,10 +122,10 @@ invCont.regInventory = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id,
   } = req.body
 
   const result = invModel.registerInventory(
+    classification_id,
     inv_make,
     inv_model,
     inv_year,
@@ -134,7 +135,7 @@ invCont.regInventory = async function (req, res) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id,)
+    )
 
 if (result) {
   req.flash(

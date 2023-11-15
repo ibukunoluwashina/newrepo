@@ -22,7 +22,7 @@ router.post('/add-classification', invController.processAddClassification);
 router.get('/add-inventory', invController.showAddInventoryView);
 
 // router to submit car inventory
-router.post("add-inventory", invController.regInventory)
+router.post("/add-inventory", invController.regInventory)
 
 
 module.exports = router;
