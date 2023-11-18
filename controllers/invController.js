@@ -148,12 +148,14 @@ if (result) {
   res.status(201).render("./inventory/management", {
     title: "Vehicle Management ",
     nav,
+    errors: null,
   })
 } else {
-  req.flash("notice", "Sorry, the registration failed.")
+  req.flash("notice", "Sorry, the vehicle couldnt be added.")
   res.status(501).render("./inventory/add-inventory", {
     title: "Add Inventory",
     nav,
+    errors: null,
   })
 }
 }

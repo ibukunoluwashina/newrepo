@@ -1,12 +1,11 @@
 const utilities = require(".")
-const accountModel = require("../models/inventory-model")
 const { body, validationResult } = require("express-validator")
 const validate = {}
 
 /*  **********************************
  *  Registration Data Validation Rules
  * ********************************* */
-validate.registationRules = () => {
+validate.registrationRules = () => {
     return [
       // classification ID
       body("classification_id")
@@ -87,7 +86,7 @@ validate.checkRegData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      let buildClassificationList = await utilities.buildClassificationList()
+      let buildClassificationList = await utilities.buildClassificationList(classification_id)
       res.render("./inventory/add-inventory", {
         errors,
         title: "Add Inventory",

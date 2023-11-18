@@ -12,7 +12,6 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildVehicleDetail);
 
 
-
 // Route for Intentional Error
 router.get("/intentional-error", invController.triggerIntentionalError);
 
@@ -28,12 +27,12 @@ router.post('/add-classification', invController.processAddClassification);
 router.get('/add-inventory', invController.showAddInventoryView);
 
 // router to submit car inventory
-router.post("/add-inventory", invController.regInventory)
+// router.post("/add-inventory", invController.regInventory)
 
 // validation for the add-inventory
 router.post(
     "/add-inventory", 
-    regValidate.registationRules(),
+    regValidate.registrationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(invController.regInventory)
     )
