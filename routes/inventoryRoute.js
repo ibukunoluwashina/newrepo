@@ -2,10 +2,16 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
+const regValidate = require('../utilities/inventory-validation')
+const utilities = require('../utilities')
+
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 //Route to handle the vehicle detail page.
 router.get("/detail/:invId", invController.buildVehicleDetail);
+
+
 
 // Route for Intentional Error
 router.get("/intentional-error", invController.triggerIntentionalError);
@@ -23,6 +29,14 @@ router.get('/add-inventory', invController.showAddInventoryView);
 
 // router to submit car inventory
 router.post("/add-inventory", invController.regInventory)
+
+// validation for the add-inventory
+router.post(
+    "/add-inventory", 
+    regValidate.registationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(invController.regInventory)
+    )
 
 
 module.exports = router;

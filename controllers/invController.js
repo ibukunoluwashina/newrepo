@@ -11,7 +11,7 @@ invCont.buildByClassificationId = async function (req, res, _next) {
   const data = await invModel.getInventoryByClassificationId(classification_id);
   const grid = await utilities.buildClassificationGrid(data);
   let nav = await utilities.getNav();
-  const className = data[0].classification_name;
+  const className = data[0] ? data[0].classification_name : null;
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
@@ -48,7 +48,7 @@ invCont.triggerIntentionalError = function (_req, _res, next) {
 };
 
 // Controller method to show the management view
-invCont.showManagementView = async function(_req, res){
+invCont.showManagementView = async function(req, res, next){
   // Retrieve data from the model if needed
   let nav = await utilities.getNav();
   // Render the view and pass the data
@@ -59,7 +59,7 @@ nav,
 };
 
 // Controller method to show the add-classification view
-invCont.showAddClassificationView = async function(_req, res) {
+invCont.showAddClassificationView = async function(req, res, next) {
   let nav = await utilities.getNav();
   // Render the view
   res.render('./inventory/add-classification.ejs',{
@@ -69,7 +69,7 @@ invCont.showAddClassificationView = async function(_req, res) {
 };
 
 // Controller method to process form submission
-invCont.processAddClassification = async function(req, res) {
+invCont.processAddClassification = async function(req, res, next) {
   const { classification_name } = req.body;
 
   // Server-side validation
@@ -100,16 +100,16 @@ if (success) {
 * *************************************** */
 invCont.showAddInventoryView = async function(req, res, next) {
   let nav = await utilities.getNav()
-  const classifications = await invModel.getClassifications()
+  let buildClassificationList = await utilities.buildClassificationList()
   res.render("./inventory/add-inventory", {
     title: "Add inventory",
     nav,
+    buildClassificationList,
     errors: null,
-    classifications,
   })
 }
 
-invCont.regInventory = async function (req, res) {
+invCont.regInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
   const { 
     classification_id,
@@ -124,6 +124,9 @@ invCont.regInventory = async function (req, res) {
     inv_color,
   } = req.body
 
+  const price = parseInt(inv_price) //convert string to number
+   const miles = parseInt(inv_miles)
+
   const result = invModel.registerInventory(
     classification_id,
     inv_make,
@@ -132,8 +135,8 @@ invCont.regInventory = async function (req, res) {
     inv_description,
     inv_image,
     inv_thumbnail,
-    inv_price,
-    inv_miles,
+    price,
+    miles,
     inv_color,
     )
 
