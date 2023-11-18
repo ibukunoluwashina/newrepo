@@ -366,7 +366,7 @@ label{
   padding: 0.2rem;
   background-color: turquoise;
   text-align: center;
-  width: 40%;
+  width: 100%;
 }
 
 .vehicle_invent a{
@@ -385,7 +385,7 @@ label{
   padding: 2px;
   background-color: turquoise;
   text-align: center;
-  width: 50%;
+  width: 100%;
 }
 
 .add_class h1, p, label{
@@ -403,10 +403,6 @@ h2.vehicle_name{
 input#classificationName{
   width: 50%;
   font-size: 15px;
-}
-
-button{
-  font-size: 7px;
 }
 
 select#inv_classification{
@@ -548,6 +544,18 @@ img.vehicle_detail_img{
 
 .vehicle_inv a{
   text-align: center;
+}
+
+.add_class{
+  width: 50%;
+}
+
+.vehicle_invent{
+  width: 40%;
+}
+
+button{
+  font-size: 7px;
 }
 
 
