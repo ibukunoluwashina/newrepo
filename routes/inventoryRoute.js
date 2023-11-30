@@ -16,7 +16,7 @@ router.get("/detail/:invId", invController.buildVehicleDetail);
 router.get("/intentional-error", invController.triggerIntentionalError);
 
 // Route to build management view
-router.get("/management", invController.showManagementView);
+router.get("/", invController.showManagementView);
 
 // Route to display the add-classification view
 router.get('/add-classification', invController.showAddClassificationView);
@@ -25,6 +25,13 @@ router.get('/add-classification', invController.showAddClassificationView);
 router.post('/add-classification', invController.processAddClassification);
 
 router.get('/add-inventory', invController.showAddInventoryView);
+
+
+// ****************************************************
+// *** get inventory for AJAX Route
+// *** Unit 5, Select inv item activity
+// ****************************************************
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // router to submit car inventory
 // router.post("/add-inventory", invController.regInventory)
@@ -37,5 +44,8 @@ router.post(
     utilities.handleErrors(invController.regInventory)
     )
 
+
+// Route to handle editing inventory items
+router.get("/inv/edit/:inv_id", utilities.handleErrors(invController.editInvItem));
 
 module.exports = router;

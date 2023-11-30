@@ -40,7 +40,14 @@ router.post(
 
 // ****************************************
 // Default route for the "accounts"
+// Deliver Account Management Activity
+// Unit 5, JWT Authorization Activity
 // ****************************************
-router.get("/", utilities.handleErrors(accountController.buildAccountManagement))
+router.get(
+  "/", 
+  utilities.checkLogin, 
+  utilities.handleErrors(accountController.buildAccountManagement)
+  )
+
 
 module.exports = router
