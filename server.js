@@ -103,6 +103,13 @@ app.use(async (err, req, res, next) => {
   })
 })
 
+// log in unit 5 activity
+app.use((req, res, next) => {
+  // Make userIsLoggedIn available in views
+  res.locals.loggedin = req.session.isLoggedIn || false;
+  next();
+});
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
