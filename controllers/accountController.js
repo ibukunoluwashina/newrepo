@@ -126,8 +126,58 @@ async function buildAccountManagement(req, res, next){
     errors: null,
   })
 }
+// redering the logout to the home view.
+async function logoutAccount(req, res, next){
+  if (req.cookies.jwt){
+    res.clearCookie('jwt')
+    req.flash("notice", "youre logged out")
+    return res.redirect("/")
+  }
+}
 
+/* ****************************************
+*  Deliver registration view
+* *************************************** */
+async function buildAccountUpdate(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/edit-account", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+  })
+}
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  } = req.body
+  const updateResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  )
 
+  if (updateResult) {
+    const itemName = updateResult.account_firstname 
+    req.flash("notice", `${itemName} your account was successfully updated.`)
+    res.redirect("account/management")
+  } else {
+    const itemName = `${account_firstname}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("account/edit-account", {
+    title: "Edit " + itemName,
+    nav,
+    errors: null,
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+    })
+  }
+}
 
-
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount, buildAccountUpdate, updateAccount }

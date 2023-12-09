@@ -1,0 +1,46 @@
+<div class="vehicle_invent">
+    <!-- Title and h1 -->
+    <title>{{ $Edit Account }}</title>
+    <h1> Edit Account </h1>
+    <!-- display flash message -->
+    <%- messages() %>
+    
+    <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+      <%  }) %>
+     </ul>
+    <% } %>
+  
+  <fieldset>
+    <form id="updateForm" action="/account/update" method="post">
+            <label for="account_firstname">First Name:</label>
+            <input type="text" name="account_firstname" id="account_firstname" size="10" required value="<%= locals.account_firstname %>">
+            <label for="account_lastname">Last Name:</label>
+            <input type="text" name="account_lastname" id="account_lastname" required value="<%= locals.account_lastname %>">
+            <label for="account_email">Email:</label>
+            <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email %>">
+            <button type="submit">Update Account</button>
+          </form>
+        <input type="hidden" name="account_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
+      </form>
+      <form action="">
+        <label for="account_password">Password:</label>
+            <span>Passwords must be at least 12 characters</span>
+               <span>and contain at least 1 number, 1 capital</span>  
+              <span> letter and 1 special character</span> 
+            <input type="password" name="account_password" id="account_password" required>
+            <button id="togglePassword" type="button">Show Password</button>
+            <button type="submit">Update Password</button>
+      </form>
+      <input type="hidden" name="account_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
+  </fieldset>
+  </div>
+
+  <script src="/js/inv-update.js"></script>
+  <script src="/js/script.js"></script>

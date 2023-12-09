@@ -156,6 +156,46 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+
+ /* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTTokenAuthz = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("notice", "Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     if (accountData.account_type === "Employee" || accountData.account_type ==="Admin") {
+      // res.locals.accountData = accountData.account_type
+      res.locals.authzLoggedin = 1
+      console.log("auth account type check")
+      next()
+     }
+    })
+  } else {
+   next()
+  }
+ }
+
+ /* ****************************************
+ *  Check Login
+ * Unit 5, jwt authorize activity
+ * ************************************ */
+ Util.checkLoginAuthz = (req, res, next) => {
+  if (res.locals.authzLoggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.") 
+    return res.redirect("/account/login")
+  }
+ }
+
  
 
 

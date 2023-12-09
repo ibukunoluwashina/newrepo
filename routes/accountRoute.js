@@ -19,18 +19,13 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 // * ***********************************************
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
-// loggin to change te view to account and logging
-// router.get('/login', (req, res) => {
-//   // Perform login logic, set req.session.isLoggedIn to true
-//   req.session.isLoggedIn = true;
-//   res.redirect('/');
-// });
 
-router.get('/logout', (req, res) => {
-  // Perform logout logic, set req.session.isLoggedIn to false
-  req.session.isLoggedIn = false;
-  res.redirect('/');
-});
+// *************************************************
+// Deliver account Management Activity
+// Unit 5, JWT Authorization Activity
+router.get("/",
+utilities.checkLogin,
+utilities.handleErrors(accountController.buildAccountManagement))
 
 // * ***********************************************
 // Process Registration 
@@ -51,6 +46,16 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
+// account Update view
+router.get("/update",  utilities.handleErrors(accountController.buildAccountUpdate))
+
+router.post(
+  "/update/",
+  regValidate.UpdateAccountRules(),
+  regValidate.checkUpdateAccountData,
+  utilities.handleErrors(accountController.updateAccount)
+)
+
 // ****************************************
 // Default route for the "accounts"
 // Deliver Account Management Activity
@@ -60,8 +65,12 @@ router.get(
   "/", 
   utilities.checkLogin, 
   utilities.handleErrors(accountController.buildAccountManagement)
-  )
+)
 
+router.get(
+  "/logout",
+  utilities.handleErrors(accountController.logoutAccount)
+)
 
 
 module.exports = router

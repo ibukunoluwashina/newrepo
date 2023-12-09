@@ -438,6 +438,10 @@ ul.notice li{
   text-align: center;
 }
 
+.vehicle_invent h2{
+  color: black;
+}
+
 .vehicle_invent{
   justify-content: center;
 }

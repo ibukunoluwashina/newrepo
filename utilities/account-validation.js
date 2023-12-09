@@ -116,5 +116,68 @@ validate.checkRegData = async (req, res, next) => {
     }
     next()
   }
+
+  /* ******************************
+ * errors directed back to the edit view
+ * ***************************** */
+  validate.checkUpdateAccount = async (req, res, next) => {
+    const { account_firstname, account_lastname, account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      res.render("account/edit-account", {
+        errors,
+        title: "Edit Account",
+        nav,
+        account_firstname,
+        account_lastname,
+        account_email,
+      })
+      return
+    }
+    next()
+  }
+  
+// update account rules.
+  validate.UpdateAccountRules = () => {
+    return [
+      body("account_firstname")
+        .trim()
+        .isEmail()
+        .normalizeEmail() // refer to validator.js docs
+        .withMessage("Please provide a first name."),
+      
+  
+      // password is required and must be strong password
+      body("account_lastname")
+        .trim()
+        .isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+        .withMessage("please peovide a last name."),
+    ]
+  }
+
+  validate.checkUpdateAccountData = async (req, res, next) => {
+    const {  account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      res.render("account/edit-account", {
+        errors,
+        title: "Account Update",
+        nav,
+        account_email,
+      })
+      return
+    }
+    next()
+  }
   
   module.exports = validate

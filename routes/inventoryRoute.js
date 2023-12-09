@@ -45,6 +45,10 @@ router.get(
     utilities.handleErrors(invController.deleteView)
 )
 
+// router.get("/logout", 
+// utilities.checkLogin,
+// utilities.handleErrors(accountController.logout))
+
 // validation for the add-inventory
 router.post(
     "/add-inventory", 
