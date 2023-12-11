@@ -136,10 +136,11 @@ async function logoutAccount(req, res, next){
 }
 
 /* ****************************************
-*  Deliver registration view
+*  Deliver the update view
 * *************************************** */
 async function buildAccountUpdate(req, res, next) {
   let nav = await utilities.getNav()
+  const account_id = parseInt(req.param.account_id)
   res.render("account/edit-account", {
     title: "Edit Account",
     nav,
@@ -161,6 +162,22 @@ async function updateAccount(req, res, next) {
     account_email,
   )
 
+  // async function buildAccountUpdate (req, res, next) {
+  //   const account_id = parseInt(req.params.account_id)
+  //   let nav = await utilities.getNav()
+  //   const accountData = await accountModel.getAccountById(account_id)
+  //   const itemName = `${accountData.account_firstname} ${accountData.account_lastname }`
+  //   res.render("/account/", {
+  //     title: "Edit " + itemName,
+  //     nav,
+  //     errors: null,
+  //     account_id: accountData.account_id,
+  //     account_firstname: accountData.account_firstname,
+  //     account_lastname: accountData.account_lastname,
+  //     account_email: accountData.account_email,
+  //   })
+  // }
+
   if (updateResult) {
     const itemName = updateResult.account_firstname 
     req.flash("notice", `${itemName} your account was successfully updated.`)
@@ -179,5 +196,41 @@ async function updateAccount(req, res, next) {
     })
   }
 }
+
+
+  // async function updateAccount  (req, res, next) {
+  //   let nav = await utilities.getNav()
+  //   const {
+  //     account_id,
+  //     account_firstname,
+  //     account_lastname,
+  //     account_email
+  //   } = req.body
+  //   const updateResult = await accountModel.updateAccount(
+  //     account_id,
+  //     account_firstname,
+  //     account_lastname,
+  //     account_email
+  //   )
+  
+  //   if (updateResult) {
+  //     const itemName = updateResult.account_firstname + " " + updateResult.account_model
+  //     req.flash("notice", `The ${itemName} was successfully updated.`)
+  //     res.redirect("/account/")
+  //   } else {
+  //     const itemName = `${account_firstname} ${account_lastname}`
+  //     req.flash("notice", "Sorry, the insert failed.")
+  //     res.status(501).render("account/edit-account", {
+  //     title: "Edit " + itemName,
+  //     nav,
+
+  //     errors: null,
+  //     account_id,
+  //     account_firstname,
+  //     account_lastname,
+  //     account_email
+  //     })
+  //   }
+  // }
 
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount, buildAccountUpdate, updateAccount }

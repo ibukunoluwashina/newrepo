@@ -47,7 +47,7 @@ router.post(
 )
 
 // account Update view
-router.get("/update",  utilities.handleErrors(accountController.buildAccountUpdate))
+router.get("/update/:account_id",  utilities.handleErrors(accountController.buildAccountUpdate))
 
 router.post(
   "/update/",
